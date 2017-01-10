@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+
+    <title>Login</title>
+
+  </head>
+
+      <meta charset="utf-8" />
+      {% block contenido %}
+  <body>
+
+    <form id=formulario, method=post enctype=multipart/data-form action=''>
+  	   {% csrf_token %}
+  	    {{formulario.as_p}}
+  	     <input type="submit" value="Entrar">
+  	</form>
+      {% endblock %}
+  </body>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <header>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <title>Clasificación Liga Santander</title>
+
+  <style>
+
+  .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+  }
+
+  .jumbotron {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    background: url('/media/images.jpeg');
+    background-size:cover;
+  }
+
+  .jumbotron2{
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: url('/media/fondo.jpeg');
+    background-size: contain;
+  }
+
+  footer {
+    padding: 20px 15px;
+    background-color: #0a0000;
+    border-top: 50px solid #0a0000;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  h2 {
+    color: #fdfefe;
+    font-family:inherit;
+    font-size: 175%;
+  }
+
+  h3 {
+    color: #fdfefe ;
+    font-family: fantasy;
+    font-size: 125%;
+  }
+
+  h4 {
+    color: #fdfefe ;
+    font-family: fantasy;
+    font-size: 115%;
+  }
+
+  h5 {
+    color: #abadac;
+    font-family: fantasy;
+    font-size: 100%;
+  }
+
+
+  table#t01 tr:nth-child(even) {
+    background-color:gray;
+  }
+  table#t01 tr:nth-child(odd) {
+    background-color:#39393b;
+  }
+  table#t01 th {
+    background-color: #000080;
+    color: #FFFF00;
+  }
+  td {
+    color: #000000;
+  }
+
+  p{
+    color:  #fdfefe;
+    font-family: sans-serif;
+    font-size: 110%;
+  }
+
+  td {
+    font-style: normal;
+    font-family: fantasy;
+    color: #fdfefe;
+    font-size: 110%;
+    text-align: center;
+  }
+
+  th {
+
+    font-style:normal;
+    font-family: fantasy;
+    color: #fdfefe;
+    font-size: 110%;
+    text-align: center;
+  }
+  </style>
+  </header>
+
+  <div class="jumbotron">
+<div class="container text-center">
+  <font color="white">
+  <h1 style="text-align:center"><strong><b>Futboleros</b></strong></h1>
+  <h2 style="text-align:center"><strong><em> La mejor página para los aficionados al fútbol nacional</em></strong></h2>
+</div>
+</div>
+
+
+<body style="background-color: #006a0a">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Futboleros</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+      <li><a href="/equipos/">Equipos</a></li>
+      <li><a href="/clasificacion/">Clasificacion</a></li>
+      <li><a href="/calendario/">Calendario</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if not user.is_authenticated %}
+      <li><a href="/registro/"><span class="glyphicon glyphicon-user"></span> Registro</a></li>
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesion</a></li>
+
+      {% else %}
+
+      <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
+      <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesion</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+</body>
+
+
+
+        <br>
+      <h1 style="text-align:center"> <kbd>Clasificacion</kbd> </h1>
+        <br>
+      <div class="jumbotron2">
+      {% if clasificados %}
+        <div class="container">
+          <br>
+          <table class="table table-bordered" id="t01">
+            <thead>
+              <tr>
+                <th>Posicion</th>
+                <th>Nombre</th>
+                <th>Escudo</th>
+                <th>Puntos</th>
+                <th>Partidos jugados</th>
+                <th>Partidos ganados</th>
+                <th>Partidos empatados</th>
+                <th>Partidos perdidos</th>
+                <th>Goles a favor</th>
+                <th>Goles en contra</th>
+              </tr>
+            </thead>
+
+        {% for clasificado in clasificados %}
+          <tbody>
+            <tr>
+              <td>{{clasificado}}</td>
+    				  <td>{{clasificado.nombreEquipo}}</td>
+              <td><img src="/media/{{clasificado.escudo}}"style="width:50px;height:50px;"> </a></td>
+              <td>{{clasificado.puntos}}</td>
+              <td>{{clasificado.partidosJugados}}</td>
+              <td>{{clasificado.partidosGanados}}</td>
+              <td>{{clasificado.partidosEmpatados}}</td>
+              <td>{{clasificado.partidosPerdidos}}</td>
+              <td>{{clasificado.golesAfavor}}</td>
+              <td>{{clasificado.golesenContra}}</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+          </table>
+        </div>
+      {% else %}
+        <h2 style="text-align:center"> No hay equipos disponibles</h2>
+      {% endif %}
+
+        <br><br><br>
+</div>
+
+    <footer>
+      <div class="container-fluid text-center">
+
+        <font color="#abadac">
+          {% block pie %}
+          <h5>Futboleros &copy; José María Luque Ortiz. Copyright 2016. Todos los derechos reservados</h5>
+          <h5>Contacto:<a href="mailto:josema.jmlo@gmail.com"> josema.jmlo@gmail.com</a></h5>
+          {% endblock %}
+        </font>
+      </div>
+    </footer>
+
+  </body>
+</html>

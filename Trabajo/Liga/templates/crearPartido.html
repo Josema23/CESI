@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <header>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <title>Crear Partido</title>
+
+  <style>
+
+  .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+  }
+
+  footer {
+    padding: 20px 15px;
+    background-color: #0a0000;
+    border-top: 50px solid #0a0000;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  .jumbotron {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    background: url('/media/images.jpeg');
+    background-size:cover;
+  }
+
+  h2 {
+    color: #fdfefe;
+    font-family:inherit;
+    font-size: 200%;
+  }
+
+  h3 {
+    color: #fdfefe ;
+    font-family: fantasy;
+    font-size: 125%;
+  }
+
+  h5 {
+    color: #abadac ;
+    font-family: fantasy;
+    font-size: 100%;
+  }
+
+  .jumbotron2 {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    background: url('/media/fondo.jpeg');
+    background-size:cover;
+  }
+
+  p{
+    color:  #fdfefe;
+    font-family: sans-serif;
+    font-size: 125%;
+  }
+
+  .table th {
+    background-color: #006a0a !important;
+  }
+
+  td {
+    font-style: normal;;
+    font-family: fantasy;
+    font color: #bcbc00;
+    font-size: 110%;
+  }
+
+  th {
+    font-style: normal;
+    font-family: fantasy;
+    font color: #bcbc00;
+    font-size: 110%;
+  }
+
+  </style>
+  </header>
+
+  <div class="jumbotron">
+<div class="container text-center">
+  <font color="white">
+  <h1 style="text-align:center"><strong><b>Futboleros</b></strong></h1>
+  <h2 style="text-align:center"><strong><em> La mejor página para los aficionados al fútbol nacional</em></strong></h2>
+</div>
+</div>
+
+
+<body style="background-color: #006a0a">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Futboleros</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+      <li><a href="/equipos/">Equipos</a></li>
+      <li><a href="/clasificacion/">Clasificacion</a></li>
+      <li><a href="/calendario/">Calendario</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if not user.is_authenticated %}
+      <li><a href="/registro/"><span class="glyphicon glyphicon-user"></span> Registro</a></li>
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesion</a></li>
+
+      {% else %}
+
+      <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
+      <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesion</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+</body>
+
+  <br></br>
+
+
+
+
+  <h1 style="text-align:center"> <kbd>Crear un nuevo partido</kbd> </h1>
+  <br>
+
+  <div class="jumbotron2">
+    <font color="#bcbc00">
+      <form id="formulario" method="post" {% if formulario.is_multipart %} enctype="multipart/form-data" {% endif %} action="">
+      {% csrf_token %}
+      <table align="center" style="text-align: center;font-size: 20px;">
+          {{ formulario }}
+      </table>
+      <br>
+        <center>
+        <br>
+      <a href="/calendario/"><button type="button" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button></a>
+      <button type="submit" class="btn btn-warning btn-lg"> Añadir Partido <span class="glyphicon glyphicon-pencil"></span> </button>
+        <br>
+      </center>
+      </form>
+    </font>
+    <br>
+  </div>
+
+
+<footer>
+  <div class="container-fluid text-center">
+
+    {% block pie %}
+    <h5>Futboleros &copy; José María Luque Ortiz. Copyright 2016. Todos los derechos reservados</h5>
+    <h5>Contacto:<a href="mailto:josema.jmlo@gmail.com"> josema.jmlo@gmail.com</a></h5>
+    {% endblock %}
+
+  </div>
+</footer>

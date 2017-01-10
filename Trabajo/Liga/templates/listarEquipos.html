@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <header>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <title>Equipos Liga Santander</title>
+  <style>
+
+  .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+  }
+
+  footer {
+    padding: 20px 15px;
+    background-color: #0a0000;
+    border-top: 50px solid #0a0000;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  .jumbotron {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    background: url('/media/images.jpeg');
+    background-size:cover;
+  }
+
+  .jumbotron2 {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    background: url('/media/fondo.jpeg');
+    background-size:contain;
+  }
+
+  pre {
+    display: block;
+    padding: inherit;
+    margin: 30px 80px 10px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 900;
+    font-family: sans-serif;
+    line-height: 1.42857143;
+    color: #333;
+    word-break: normal;
+    word-wrap: normal;
+    width: 1200px;
+    background-color: #f5f5f5;
+    border: 5px solid #ccc;
+    border-radius: 9px;
+  }
+
+  h2 {
+    color: #fdfefe;
+    font-family:inherit;
+    font-size: 175%;
+  }
+
+  h3 {
+    color: #fdfefe;
+    font-family: fantasy;
+    font-size: 200%;
+  }
+
+  h5 {
+    color: #abadac ;
+    font-family: fantasy;
+    font-size: 100%;
+  }
+
+  p.indent
+  {
+    padding-left: 1.8em
+  }
+
+  </style>
+
+  </header>
+
+  <div class="jumbotron">
+    <div class="container text-center">
+      <font color="white">
+        <h1 style="text-align:center"><strong><b>Futboleros</b></strong></h1>
+      </font>
+        <h2 style="text-align:center"><strong><em> La mejor página para los aficionados al fútbol nacional</em></strong></h2>
+    </div>
+  </div>
+
+
+<body style="background-color: #006a0a">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">Futboleros</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+      <li><a href="/equipos/">Equipos</a></li>
+      <li><a href="/clasificacion/">Clasificacion</a></li>
+      <li><a href="/calendario/">Calendario</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if not user.is_authenticated %}
+      <li><a href="/registro/"><span class="glyphicon glyphicon-user"></span> Registro</a></li>
+      <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesion</a></li>
+
+      {% else %}
+
+      <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
+      <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesion</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>
+</body>
+
+  <br></br>
+
+  <h1 style="text-align:center"> <kbd> Equipos Liga Santander </kbd> </h1>
+
+  <br></br>
+
+
+  <div class="jumbotron2">
+    <div class="list-group">
+
+        {% if equipos %}
+          {% for equipo in equipos %}
+
+            <pre><a href="/equipo/{{equipo.id}}" style="text-align:center" class="list-group-item">&nbsp&nbsp&nbsp&nbsp {{equipo.nombreEquipo}} &nbsp&nbsp&nbsp&nbsp<img src="/media/{{equipo.nombreEquipo}}.png" class="img-rounded" alt="" width="100" height="100"></a></pre>
+
+          {% endfor %}
+        {% else %}
+          <h2 style="text-align:center"> No hay equipos disponibles</h2>
+        {% endif %}
+  </div>
+
+  <br></br>
+  {% if user.is_authenticated %}
+
+      <p> <a href="/equipos/crear" type="input" class="btn btn-warning btn-lg">Crear Nuevo Equipo <span class="glyphicon glyphicon-plus"></span></a></p>
+
+  {% endif %}
+  <br></br>
+</div>
+ 
+</body>
+
+
+<footer>
+<div class="container-fluid text-center">
+
+      {% block pie %}
+      <h5>Futboleros &copy; José María Luque Ortiz. Copyright 2016. Todos los derechos reservados<h5>
+      <h5>Contacto:<a href="mailto:josema.jmlo@gmail.com"> josema.jmlo@gmail.com</a></h5>
+      {% endblock %}
+
+</div>
+</footer>
+
+</body>
+</html>

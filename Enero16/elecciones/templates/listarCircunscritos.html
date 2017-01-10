@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  <head>
+
+    <title>Listado de circunscritos</title>
+
+  </head>
+
+    <meta charset="utf-8" />
+
+    <body>
+      <header>
+
+
+          <div class="container">
+            {% if circunscritos %}
+              {% for circunscrito in circunscritos %}
+
+                <p><a href="/circunscritos/{{circunscrito.id}}">Nombre: {{circunscrito.nombre}}</a></p>
+
+              {% endfor %}
+            {% endif %}
+          </div>
+      </header>
+    </body>
+
+</html>

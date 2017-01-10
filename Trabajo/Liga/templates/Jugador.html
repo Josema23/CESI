@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="es">
+  <header>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <title>{{jugador.nombre}}</title>
+
+  <style>
+
+  .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+  }
+
+  .jumbotron {
+    padding-top: 80px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    color: inherit;
+    background: url('/media/images.jpeg');
+    background-size:cover;
+  }
+
+  .thumbnail {
+    display: block;
+    margin-left: 15px;
+    width:250px;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #302f2f;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    -webkit-transition: border .2s ease-in-out;
+         -o-transition: border .2s ease-in-out;
+            transition: border .2s ease-in-out;
+  }
+
+
+  footer {
+    padding: 20px 15px;
+    background-color: #0a0000;
+    border-top: 50px solid #0a0000;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+  }
+
+  h2 {
+    color: #fdfefe;
+    font-family:inherit;
+    font-size: 200%;
+  }
+
+  h3 {
+    color: #fdfefe ;
+    font-family: fantasy;
+    font-size: 125%;
+  }
+
+  h5 {
+    color: #abadac ;
+    font-family: fantasy;
+    font-size: 100%;
+  }
+
+  p{
+    color:  #fdfefe;
+    font-family:inherit;
+    font-size: 200%;
+  }
+
+  .table th {
+    background-color: #006a0a !important;
+  }
+
+  td {
+    font-style: italic;
+    font color: #fdfefe;
+    font-size: 110%;
+  }
+
+  th {
+    font-style: oblique;
+    font color: #fdfefe;
+    font-size: 110%;
+  }
+  </style>
+
+
+</header>
+
+  <div class="jumbotron">
+    <div class="container text-center">
+      <font color="white">
+        <h1 style="text-align:center"><strong><b>Futboleros</b></strong></h1>
+        <h2 style="text-align:center"><strong><em> La mejor página para los aficionados al fútbol nacional</em></strong></h2>
+    </div>
+  </div>
+
+
+  <body style="background-color: #006a0a">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Futboleros</a>
+        </div>
+  <ul class="nav navbar-nav">
+
+    <li><a href="/equipos/">Equipos</a></li>
+    <li><a href="/clasificacion/">Clasificacion</a></li>
+    <li><a href="/calendario/">Calendario</a></li>
+  </ul>
+  <ul class="nav navbar-nav navbar-right">
+    {% if not user.is_authenticated %}
+    <li><a href="/registro/"><span class="glyphicon glyphicon-user"></span> Registro</a></li>
+    <li><a href="/login/"><span class="glyphicon glyphicon-log-in"></span> Iniciar sesion</a></li>
+
+    {% else %}
+
+    <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> {{user.username}}</a></li>
+    <li><a href="/logout/"><span class="glyphicon glyphicon-log-out"></span> Cerrar sesion</a></li>
+    {% endif %}
+  </ul>
+</div>
+</nav>
+</body>
+
+<br>
+
+  <center>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="thumbnail">
+              <img src="/media/{{equipo.nombreEquipo}}/{{jugador.imagen}}" style="image-align:center" style="width:100%"></img>
+              <div class="caption">
+                <h2 style="text-align:center">{{jugador.dorsal}}</h2><p style="text-align:center">{{jugador.nombre}}</p><p style="text-align:center">{{jugador.posicion}}</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-5" style="text-align:left">
+      <h3>Nombre completo: {{jugador.nombrecompleto}}</h3>
+      <h3>Edad: {{jugador.edad}}</h3>
+      <h3>Fecha de Nacimiento: {{jugador.nacimiento}}</h3>
+      <h3>Goles: {{jugador.goles}}</h3>
+      <h3>Asistencias: {{jugador.asistencias}}</h3>
+      <h3>Tarjetas amarillas: {{jugador.amarillas}}</h3>
+      <h3>Tarjetas rojas: {{jugador.rojas}}</h3>
+
+    </div>
+  </div>
+</div>
+
+<br></br>
+
+  <h1>{{equipo.nombreEquipo}}</h1>
+
+{% if user.is_authenticated %}
+
+
+    <p><a href="modificar" type="input" class="btn btn-warning btn-lg" value="Modificar Jugador">  Modificar Jugador  <span class="glyphicon glyphicon-pencil"></span></a> <a href="borrar" type="input" class="btn btn-danger btn-lg" value="Eliminar Jugador">  Eliminar Jugador  <span class="glyphicon glyphicon-minus"></span></a></p>
+
+
+{% endif %}
+</center>
+<br>
+
+<footer>
+  <div class="container-fluid text-center">
+
+      {% block pie %}
+      <h5>Futboleros &copy; José María Luque Ortiz. Copyright 2016. Todos los derechos reservados</h5>
+      <h5>Contacto:<a href="mailto:josema.jmlo@gmail.com"> josema.jmlo@gmail.com</a></h5>
+      {% endblock %}
+
+  </div>
+</footer>
+
+</body>
+</html>
